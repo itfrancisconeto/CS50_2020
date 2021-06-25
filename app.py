@@ -1,5 +1,6 @@
 # Imports
 from flask import Flask, render_template, flash, Response, request, redirect, url_for
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from PIL import Image, ImageChops, ImageStat
 import os
@@ -14,6 +15,7 @@ UPLOAD_FOLDER_IMAGES = 'static/images/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
+cors = CORS(app, resource={r"/*":{"origins": "*"}})
 app.config['UPLOAD_FOLDER_TARGET'] = UPLOAD_FOLDER_TARGET
 secret = secrets.token_urlsafe(32)
 app.secret_key = secret
@@ -91,6 +93,10 @@ def organize():
     filesOrganized = np.asarray(filesToOrganizeList)
     print(filesOrganized)
     return render_template('index.html', targetFileArray=targetFileArray[0], filesOrganized=filesOrganized[:,1])
+
+def main():
+     port = int(os.environ.get("PORT", 5000))
+     app.run(host = "0.0.0.0", port = port, debug=True)
 
 if __name__ == "__main__":
     app.run(debug=True)
