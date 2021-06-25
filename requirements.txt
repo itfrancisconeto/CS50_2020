@@ -1,0 +1,7 @@
+Flask
+Flask-Cors
+widgetsnbextension
+Pillow
+SecretStorage
+backports
+glob2
