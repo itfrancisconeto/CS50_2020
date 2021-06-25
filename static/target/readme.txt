@@ -1,0 +1,1 @@
+pasta para armazenar o arquivo com a imagem a ser comparada
